@@ -49,14 +49,13 @@ public class Aluno {
     private String email;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "turma_id")
-    @RestResource
     private Turma turma;
 
-    public Aluno(String name, String matricula, String email) {
-        this.name = name;
-        this.matricula = matricula;
-        this.email = email;
-    }
+//    public Aluno(String name, String matricula, String email) {
+//        this.name = name;
+//        this.matricula = matricula;
+//        this.email = email;
+//    }
 }

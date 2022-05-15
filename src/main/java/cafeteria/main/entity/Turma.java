@@ -45,13 +45,13 @@ public class Turma {
     private String sala;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "professor_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
     private Professor professor;    
 
     @JsonManagedReference
-    @OneToOne(mappedBy = "turma", fetch = FetchType.EAGER)
-    private Aluno aluno;
+    @OneToMany(mappedBy = "turma", fetch = FetchType.EAGER)
+    private List<Aluno> alunos;
 
     public Turma(String name, String sala) {
         this.name = name;
