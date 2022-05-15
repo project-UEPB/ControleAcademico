@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -47,6 +48,10 @@ public class Turma {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professor_id", referencedColumnName = "id")
     private Professor professor;    
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "turma", fetch = FetchType.EAGER)
+    private Aluno aluno;
 
     public Turma(String name, String sala) {
         this.name = name;

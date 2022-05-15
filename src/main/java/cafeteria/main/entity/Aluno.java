@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -46,6 +47,12 @@ public class Aluno {
 
     @Column(name = "email", unique = true)
     private String email;
+
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "turma_id")
+    @RestResource
+    private Turma turma;
 
     public Aluno(String name, String matricula, String email) {
         this.name = name;

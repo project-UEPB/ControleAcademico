@@ -71,12 +71,12 @@ public class TurmaController {
         return turmaRepository.save(turma);
     }
 
-    // @PatchMapping("/{turmaId}/matricularAluno/{alunoId}")
-    // @ApiOperation(value = "Vincula um aluno a uma turma a partir do seu identificador")
-    // public Aluno patchAlunoAndProfessor(@PathVariable("turmaId") Long turmaId, @PathVariable("alunoId") Long alunoId) {
-    //     Aluno aluno = alunoRepository.findById(alunoId).get();
-    //     Turma turma = turmaRepository.findById(turmaId).get();
-    //     aluno.setTurma(turma);
-    //     return alunoRepository.save(aluno);
-    // }
+    @PatchMapping("/{turmaId}/matricularAluno/{alunoId}")
+    @ApiOperation(value = "Vincula um aluno a uma turma a partir do seu identificador")
+    public Aluno patchAlunoAndProfessor(@PathVariable("turmaId") Long turmaId, @PathVariable("alunoId") Long alunoId) {
+        Aluno aluno = alunoRepository.findById(alunoId).get();
+        Turma turma = turmaRepository.findById(turmaId).get();
+        aluno.setTurma(turma);
+        return alunoRepository.save(aluno);
+    }
 }
