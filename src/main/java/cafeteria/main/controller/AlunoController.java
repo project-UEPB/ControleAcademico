@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import cafeteria.main.entity.Aluno;
+import cafeteria.main.entity.Turma;
 import cafeteria.main.repository.AlunoRepository;
+import cafeteria.main.repository.TurmaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

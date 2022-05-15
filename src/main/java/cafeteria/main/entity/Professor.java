@@ -2,10 +2,19 @@ package cafeteria.main.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,6 +42,10 @@ public class Professor {
 
     @Column(name = "formacao")
     private String formacao;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Turma> turma = new ArrayList<>();
 
     public Professor(String name, String matricula, String email, String formacao) {
         this.name = name;

@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import cafeteria.main.repository.TurmaRepository;
+import cafeteria.main.repository.AlunoRepository;
+import cafeteria.main.repository.ProfessorRepository;
+
 import cafeteria.main.entity.Turma;
+import cafeteria.main.entity.Aluno;
+import cafeteria.main.entity.Professor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +24,12 @@ public class TurmaController {
 
     @Autowired
     private TurmaRepository turmaRepository;
+
+    @Autowired
+    private ProfessorRepository professorRepository;
+
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @GetMapping
     @ApiOperation(value = "Busca uma lista de todas as turmas")
@@ -49,4 +61,22 @@ public class TurmaController {
     public void deleteTurma(@PathVariable Long id) {
         turmaRepository.delete(turmaRepository.findById(id).get());
     }
+
+    @PatchMapping("/{turmaId}/vincularProfessor/{idProfessor}")
+    @ApiOperation(value = "Vincula um professor a uma turma a partir do seu identificador")
+    public Turma vincularProfessor(@PathVariable("turmaId") Long turmaId, @PathVariable("idProfessor") Long idProfessor) {
+        Professor professor = professorRepository.findById(idProfessor).get();
+        Turma turma = turmaRepository.findById(turmaId).get();
+        turma.setProfessor(professor);
+        return turmaRepository.save(turma);
+    }
+
+    // @PatchMapping("/{turmaId}/matricularAluno/{alunoId}")
+    // @ApiOperation(value = "Vincula um aluno a uma turma a partir do seu identificador")
+    // public Aluno patchAlunoAndProfessor(@PathVariable("turmaId") Long turmaId, @PathVariable("alunoId") Long alunoId) {
+    //     Aluno aluno = alunoRepository.findById(alunoId).get();
+    //     Turma turma = turmaRepository.findById(turmaId).get();
+    //     aluno.setTurma(turma);
+    //     return alunoRepository.save(aluno);
+    // }
 }
