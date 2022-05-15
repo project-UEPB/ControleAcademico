@@ -1,8 +1,10 @@
-package cafeteria.main.Aluno;
+package cafeteria.main.controller;
 
 import java.util.List;
 import java.util.Optional;
 
+import cafeteria.main.entity.Aluno;
+import cafeteria.main.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +32,7 @@ public class AlunoController {
 
     @PutMapping("/{id}")
     public Aluno updateAluno(@PathVariable("id") Long id, @RequestBody Aluno aluno) {
+        aluno.setId(id);
         return alunoRepository.save(aluno);
     }
 

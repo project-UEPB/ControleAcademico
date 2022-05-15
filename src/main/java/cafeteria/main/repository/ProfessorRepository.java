@@ -1,12 +1,13 @@
-package cafeteria.main.Professor;
+package cafeteria.main.repository;
 
 import java.util.Optional;
 
+import cafeteria.main.entity.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface ProfessorRepository extends JpaRepository<Professor, Long> {
+public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     // Optional -> serve para previnir erros
     Optional<Professor> findByName(String name);
 }

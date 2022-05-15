@@ -1,4 +1,4 @@
-package cafeteria.main.Professor;
+package cafeteria.main.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +15,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "professores")
-public class Professor {
+@Table(name = "turmas")
+public class Turma {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,11 @@ public class Professor {
     @Column(name = "name")
     private String name;
 
-    public Professor(String name) {
+    @Column(name = "sala")
+    private String sala;
+
+
+    public Turma(String name) {
         this.name = name;
     }
 }
