@@ -3,6 +3,7 @@ package cafeteria.main.controller;
 import java.util.List;
 import java.util.Optional;
 
+import cafeteria.main.dto.AlunoDTO;
 import cafeteria.main.entity.Aluno;
 import cafeteria.main.entity.Turma;
 import cafeteria.main.repository.AlunoRepository;
@@ -24,7 +25,7 @@ public class AlunoController {
 
     @GetMapping
     @ApiOperation(value = "Busca uma lista de alunos")
-    public List<Aluno> getAlunos() {
+    public List<AlunoDTO> getAlunos() {
         return alunoRepository.findAll();
     }
 
