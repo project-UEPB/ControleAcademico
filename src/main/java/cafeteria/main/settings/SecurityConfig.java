@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import cafeteria.main.components.authentication.CustomAuthenticationProvider;
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -18,19 +19,22 @@ import lombok.AllArgsConstructor;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private CustomAuthenticationProvider authenticationProvider;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        var userDetailsService = new InMemoryUserDetailsManager();
+        // var userDetailsService = new InMemoryUserDetailsManager();
 
-        var user = User.withUsername("joaozinho")
-        .password(bCryptPasswordEncoder.encode("0000"))
-        .authorities("user")
-        .build();
+        // var user = User.withUsername("joaozinho")
+        // .password(bCryptPasswordEncoder.encode("0000"))
+        // .authorities("user")
+        // .build();
 
-        userDetailsService.createUser(user);
+        // userDetailsService.createUser(user);
 
-        auth.userDetailsService(userDetailsService);
+        // auth.userDetailsService(userDetailsService);
+
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
