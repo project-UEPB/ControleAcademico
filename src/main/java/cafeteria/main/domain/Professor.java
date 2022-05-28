@@ -1,4 +1,4 @@
-package cafeteria.main.entity;
+package cafeteria.main.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

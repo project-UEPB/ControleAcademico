@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import cafeteria.main.domain.Aluno;
+import cafeteria.main.domain.Turma;
 import cafeteria.main.dto.AlunoDTO;
-import cafeteria.main.entity.Aluno;
-import cafeteria.main.entity.Turma;
 import cafeteria.main.mapper.AlunoMapper;
 import cafeteria.main.repository.AlunoRepository;
 import cafeteria.main.repository.TurmaRepository;
@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/alunos")
 @Api(value = "Aluno")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AlunoController {
 
-    @Autowired
     private AlunoRepository alunoRepository;
-
-    @Autowired
     private AlunoMapper alunoMapper;
 
     @GetMapping

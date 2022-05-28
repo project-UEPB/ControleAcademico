@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import cafeteria.main.repository.TurmaRepository;
+import cafeteria.main.domain.Aluno;
+import cafeteria.main.domain.Professor;
+import cafeteria.main.domain.Turma;
 import cafeteria.main.repository.AlunoRepository;
 import cafeteria.main.repository.ProfessorRepository;
-
-import cafeteria.main.entity.Turma;
-import cafeteria.main.entity.Aluno;
-import cafeteria.main.entity.Professor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

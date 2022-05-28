@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,10 +30,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "alunos")
-public class Aluno {
+@Table(name = "turmas")
+public class Turma {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,20 +41,20 @@ public class Aluno {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "matricula", unique = true)
-    private String matricula;
-
-    @Column(name = "email", unique = true)
-    private String email;
+    @Column(name = "sala")
+    private String sala;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "turma_id")
-    private Turma turma;
+    @JoinColumn(name = "professor_id")
+    private Professor professor;    
 
-//    public Aluno(String name, String matricula, String email) {
-//        this.name = name;
-//        this.matricula = matricula;
-//        this.email = email;
-//    }
+    @JsonManagedReference
+    @OneToMany(mappedBy = "turma", fetch = FetchType.EAGER)
+    private List<Aluno> alunos;
+
+    public Turma(String name, String sala) {
+        this.name = name;
+        this.sala = sala;
+    }
 }

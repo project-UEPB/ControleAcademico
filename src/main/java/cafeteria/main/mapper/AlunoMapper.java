@@ -3,7 +3,7 @@ package cafeteria.main.mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cafeteria.main.entity.Aluno;
+import cafeteria.main.domain.Aluno;
 import cafeteria.main.dto.AlunoDTO;
 
 public class AlunoMapper {

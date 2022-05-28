@@ -3,7 +3,7 @@ package cafeteria.main.controller;
 import java.util.List;
 import java.util.Optional;
 
-import cafeteria.main.entity.Professor;
+import cafeteria.main.domain.Professor;
 import cafeteria.main.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,6 @@
 package cafeteria.main.dto;
 
-import cafeteria.main.entity.Turma;
-
+import cafeteria.main.domain.Turma;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
