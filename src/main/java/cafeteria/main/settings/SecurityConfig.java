@@ -3,6 +3,7 @@ package cafeteria.main.settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -18,18 +19,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Bean
-    public UserDetailsService userDetailsService() {
-		var userDetailsService = new InMemoryUserDetailsManager();
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        var userDetailsService = new InMemoryUserDetailsManager();
 
-		var user = User.withUsername("joaozinho")
-		.password(bCryptPasswordEncoder.encode("123456"))
-		.authorities("user")
-		.build();
+        var user = User.withUsername("joaozinho")
+        .password(bCryptPasswordEncoder.encode("0000"))
+        .authorities("user")
+        .build();
 
-		userDetailsService.createUser(user);
+        userDetailsService.createUser(user);
 
-		return userDetailsService;
+        auth.userDetailsService(userDetailsService);
     }
 
     @Override
