@@ -2,10 +2,12 @@ package cafeteria.main.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import cafeteria.main.dto.AlunoDTO;
 import cafeteria.main.entity.Aluno;
 import cafeteria.main.entity.Turma;
+import cafeteria.main.mapper.AlunoMapper;
 import cafeteria.main.repository.AlunoRepository;
 import cafeteria.main.repository.TurmaRepository;
 
@@ -23,10 +25,16 @@ public class AlunoController {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    @Autowired
+    private AlunoMapper alunoMapper;
+
     @GetMapping
     @ApiOperation(value = "Busca uma lista de alunos")
     public List<AlunoDTO> getAlunos() {
-        return alunoRepository.findAll();
+        List<Aluno> alunos = alunoRepository.findAll();
+        return alunos.stream()
+        .map(alunoMapper::convertToAlunoDTO)
+        .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
