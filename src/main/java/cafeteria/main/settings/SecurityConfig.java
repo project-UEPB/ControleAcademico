@@ -1,22 +1,29 @@
 package cafeteria.main.settings;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import lombok.AllArgsConstructor;
+
 @Configuration
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Bean
     public UserDetailsService userDetailsService() {
 		var userDetailsService = new InMemoryUserDetailsManager();
 
 		var user = User.withUsername("joaozinho")
-		.password("123456")
+		.password(bCryptPasswordEncoder.encode("123456"))
 		.authorities("user")
 		.build();
 
