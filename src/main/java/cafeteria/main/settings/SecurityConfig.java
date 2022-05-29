@@ -6,12 +6,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import cafeteria.main.components.authentication.CustomAuthenticationProvider;
+import cafeteria.main.filters.AuthenticationFilter;
+import cafeteria.main.filters.AuthorizationFilter;
 import lombok.AllArgsConstructor;
 
 @Configuration
@@ -24,42 +30,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
         "/v2/api-docs",
         "/signup",
+        "/login",
         "/h2-console/**",
         "/swagger-resources",
         "/swagger-resources/**",
         "/configuration/ui",
         "/configuration/security",
-        "/swagger-ui.html",
+        "/swagger-ui.html/**",
         "/webjars/**"
     };
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // var userDetailsService = new InMemoryUserDetailsManager();
-
-        // var user = User.withUsername("joaozinho")
-        // .password(bCryptPasswordEncoder.encode("0000"))
-        // .authorities("user")
-        // .build();
-
-        // userDetailsService.createUser(user);
-
-        // auth.userDetailsService(userDetailsService);
-
         auth.authenticationProvider(authenticationProvider);
     }
 
     @Override
 	protected void configure(HttpSecurity http) throws Exception {
-	 	http.httpBasic();
-		// acesso ao Banco de Dados em memória (H2) - origem de endereço diferente (CORS)
+        http.httpBasic();
         http.cors().and().csrf().disable();
         http.headers().frameOptions().sameOrigin(); 
-		
-		http.authorizeRequests()
+        http.authorizeRequests()
             .antMatchers(AUTH_WHITELIST).permitAll()
-            .mvcMatchers("/alunos/**").hasAuthority("admin")
-            .anyRequest().authenticated();
-        // ou .permitAll() para anular a necessidade de autenticação
+            .anyRequest().authenticated()
+            .and().addFilter(new AuthenticationFilter(authenticationManager()))
+            .addFilter(new AuthorizationFilter(authenticationManager()))
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**",new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
 }
