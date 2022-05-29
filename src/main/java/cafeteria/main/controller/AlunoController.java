@@ -32,8 +32,8 @@ public class AlunoController {
     public List<AlunoDTO> getAlunos() {
         List<Aluno> alunos = alunoRepository.findAll();
         return alunos.stream()
-        .map(alunoMapper::convertToAlunoDTO)
-        .collect(Collectors.toList());
+            .map(alunoMapper::convertToAlunoDTO)
+            .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")

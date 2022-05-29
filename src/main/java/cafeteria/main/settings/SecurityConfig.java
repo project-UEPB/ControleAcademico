@@ -58,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
             .antMatchers(AUTH_WHITELIST).permitAll()
+            .mvcMatchers("/alunos/**").hasAuthority("admin")
             .anyRequest().authenticated();
-            // .mvcMatchers(...patterns: "/coffees/**").authenticated();
         // ou .permitAll() para anular a necessidade de autenticação
 	}
 }
