@@ -39,6 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/swagger-ui.html/**",
         "/webjars/**"
     };
+    
+    private static final String[] AUTH_PRIVATE = {
+        "/alunos/**",
+        "/professores/**",
+        "/turmas/**"
+    };
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin(); 
         http.authorizeRequests()
             .antMatchers(AUTH_WHITELIST).permitAll()
+            .antMatchers(AUTH_PRIVATE).hasAnyAuthority("user", "admin")
             .anyRequest().authenticated()
             .and().addFilter(new AuthenticationFilter(authenticationManager()))
             .addFilter(new AuthorizationFilter(authenticationManager()))
