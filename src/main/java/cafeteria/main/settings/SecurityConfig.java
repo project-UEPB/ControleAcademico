@@ -21,6 +21,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private CustomAuthenticationProvider authenticationProvider;
 
+    private static final String[] AUTH_WHITELIST = {
+        "/v2/api-docs",
+        "/signup",
+        "/h2-console/**",
+        "/swagger-resources",
+        "/swagger-resources/**",
+        "/configuration/ui",
+        "/configuration/security",
+        "/swagger-ui.html",
+        "/webjars/**"
+    };
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // var userDetailsService = new InMemoryUserDetailsManager();
@@ -44,6 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.headers().frameOptions().sameOrigin(); 
 		
-		http.authorizeRequests().anyRequest().authenticated(); // ou .permitAll() para anular a necessidade de autenticação
+		http.authorizeRequests()
+            .antMatchers(AUTH_WHITELIST).permitAll()
+            .anyRequest().authenticated();
+            // .mvcMatchers(...patterns: "/coffees/**").authenticated();
+        // ou .permitAll() para anular a necessidade de autenticação
 	}
 }
