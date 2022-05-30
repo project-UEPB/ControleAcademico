@@ -12,5 +12,5 @@ public class AlunoDTO {
     private String email;
     private Turma turma;
 
-    private double nota;
+    private double CRA;
 }

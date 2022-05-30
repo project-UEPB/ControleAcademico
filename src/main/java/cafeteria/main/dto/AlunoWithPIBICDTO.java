@@ -6,5 +6,5 @@ import lombok.Data;
 public class AlunoWithPIBICDTO {
     
     private String matricula;
-    private double notaExtra;
+    private double CRA;
 }

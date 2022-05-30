@@ -48,6 +48,8 @@ public class Aluno {
     @Column(name = "email", unique = true)
     private String email;
 
+    private double CRA;
+
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "turma_id")

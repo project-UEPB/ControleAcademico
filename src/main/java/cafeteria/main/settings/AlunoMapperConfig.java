@@ -1,5 +1,6 @@
 package cafeteria.main.settings;
 
+import cafeteria.main.mapper.AlunoWithPIBICMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,11 @@ public class AlunoMapperConfig {
     @Bean
     public AlunoMapper alunoMapper() {
         return new AlunoMapper();
+    }
+
+    @Bean
+    public AlunoWithPIBICMapper alunoWithPIBICMapper() {
+        return new AlunoWithPIBICMapper();
     }
 
     @Bean

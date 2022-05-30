@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import cafeteria.main.dto.UserDTO;
 import cafeteria.main.mapper.UserMapper;
-import cafeteria.main.service.UserService;
+import cafeteria.main.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
