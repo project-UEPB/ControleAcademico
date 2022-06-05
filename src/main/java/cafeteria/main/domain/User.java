@@ -36,6 +36,7 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String password;
     private String authority;
+    //informar o papel: /linkAlunos/**).hashole("teacher") -> definir os papeis no SecurityConfig
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

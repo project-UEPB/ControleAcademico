@@ -3,14 +3,12 @@ package cafeteria.main.settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
         "/v2/api-docs",
         "/signup",
-        "/login",
+        "/login/**",
         "/h2-console/**",
         "/swagger-resources",
         "/swagger-resources/**",
@@ -40,10 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/webjars/**"
     };
     
-    private static final String[] AUTH_PRIVATE = {
-        "/alunos/**",
-        "/professores/**",
-        "/turmas/**"
+    private static final String[] AUTH_ADMIN = {
+            "/turmas/**",
+            "/professores/**",
+            "/alunos/**"
     };
 
     @Override
@@ -55,10 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
         http.cors().and().csrf().disable();
-        http.headers().frameOptions().sameOrigin(); 
+        http.headers().frameOptions().sameOrigin();
+
         http.authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/alunos/**").hasAnyAuthority("user", "admin")
+            .antMatchers(AUTH_ADMIN).hasAuthority("admin")
             .antMatchers(AUTH_WHITELIST).permitAll()
-            .antMatchers(AUTH_PRIVATE).hasAnyAuthority("user", "admin")
             .anyRequest().authenticated()
             .and().addFilter(new AuthenticationFilter(authenticationManager()))
             .addFilter(new AuthorizationFilter(authenticationManager()))
