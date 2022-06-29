@@ -55,9 +55,9 @@ public class Aluno {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
-//    public Aluno(String name, String matricula, String email) {
-//        this.name = name;
-//        this.matricula = matricula;
-//        this.email = email;
-//    }
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "projeto_id")
+    private Projeto projeto;
+
 }
