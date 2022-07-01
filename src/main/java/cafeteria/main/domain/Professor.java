@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -34,7 +35,8 @@ public class Professor {
     @Column(name = "formacao")
     private String formacao;
 
-    @OneToOne(mappedBy = "projeto")
+    @JsonBackReference
+    @OneToOne(mappedBy = "professor", fetch = FetchType.EAGER)
     private Projeto projeto;
 
     @JsonManagedReference

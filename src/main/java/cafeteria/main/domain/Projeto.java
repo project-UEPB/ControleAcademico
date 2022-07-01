@@ -33,4 +33,9 @@ public class Projeto {
     @JsonManagedReference
     @OneToMany(mappedBy = "projeto", fetch = FetchType.EAGER)
     private List<Aluno> alunos;
+
+    public Projeto(String name, String descricao) {
+        this.name = name;
+        this.descricao = descricao;
+    }
 }

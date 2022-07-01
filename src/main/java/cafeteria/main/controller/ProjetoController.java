@@ -3,7 +3,6 @@ package cafeteria.main.controller;
 import cafeteria.main.domain.Aluno;
 import cafeteria.main.domain.Professor;
 import cafeteria.main.domain.Projeto;
-import cafeteria.main.domain.Turma;
 import cafeteria.main.repository.AlunoRepository;
 import cafeteria.main.repository.ProfessorRepository;
 import cafeteria.main.repository.ProjetoRepository;

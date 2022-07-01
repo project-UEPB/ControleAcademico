@@ -42,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_ADMIN = {
             "/turmas/**",
             "/professores/**",
-            "/alunos/**"
+            "/alunos/**",
+            "/projeto/**"
     };
 
     @Override
