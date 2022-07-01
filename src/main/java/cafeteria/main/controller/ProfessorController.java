@@ -6,13 +6,14 @@ import java.util.Optional;
 import cafeteria.main.domain.Professor;
 import cafeteria.main.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/professores")
+@RequestMapping(value = "/professores")
 @Api(value = "Professor")
 public class ProfessorController {
 
@@ -31,7 +32,7 @@ public class ProfessorController {
         return professorRepository.findById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"*/*"})
     @ApiOperation(value = "Cria um novo professor")
     public Professor createProfessor(@RequestBody Professor professor) {
         return professorRepository.save(professor);

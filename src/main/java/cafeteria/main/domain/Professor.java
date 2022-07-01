@@ -1,7 +1,6 @@
 package cafeteria.main.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;

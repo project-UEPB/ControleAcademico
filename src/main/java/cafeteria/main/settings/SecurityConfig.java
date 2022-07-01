@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_WHITELIST = {
         "/v2/api-docs",
         "/signup",
+        "/actuator/health",
         "/login/**",
         "/h2-console/**",
         "/swagger-resources",
