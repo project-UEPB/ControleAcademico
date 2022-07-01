@@ -11,9 +11,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Getter;
@@ -42,6 +45,11 @@ public class Professor {
 
     @Column(name = "formacao")
     private String formacao;
+
+    // @OneToOne
+    // @JoinColumn(name = "projeto_id")
+    // // @RestResource(path = "professorProjeto", rel="projeto")
+    // private Projeto projeto;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

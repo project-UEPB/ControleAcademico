@@ -1,5 +1,6 @@
 package cafeteria.main.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,12 +26,15 @@ public class Projeto {
     private String descricao;
 
 //    @JsonManagedReference
-//    @OneToOne(mappedBy = "projeto")
-//    private Professor professor;
-//
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
-//    private List<Aluno> alunos;
+    // @JsonIgnore
+    // @OneToOne(mappedBy = "projeto")
+    // private Professor professor;
+
+    // @JsonManagedReference
+    // @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @JsonIgnore
+    @OneToMany(mappedBy = "projeto")
+    private List<Aluno> alunos;
 
     public Projeto(String name, String descricao) {
         this.name = name;

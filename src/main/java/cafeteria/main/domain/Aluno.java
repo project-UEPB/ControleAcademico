@@ -55,6 +55,12 @@ public class Aluno {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
+    // @JsonBackReference
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "projeto_id")
+    private Projeto projeto;
+
 //    public Aluno(String name, String matricula, String email) {
 //        this.name = name;
 //        this.matricula = matricula;

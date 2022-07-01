@@ -68,13 +68,13 @@ public class ProjetoController {
     //     return projetoRepository.save(projeto);
     // }
 
-    // @PatchMapping("/{projetoId}/matricularAluno/{alunoId}")
-    // @ApiOperation(value = "Vincula um aluno a um projeto a partir do seu identificador")
-    // public Aluno patchAlunoAndProfessor(@PathVariable("projetoId") Long projetoId, @PathVariable("alunoId") Long alunoId) {
-    //     Aluno aluno = alunoRepository.findById(alunoId).get();
-    //     Projeto projeto = projetoRepository.findById(projetoId).get();
-    //     aluno.setProjeto(projeto);
-    //     return alunoRepository.save(aluno);
-    // }
+    @PatchMapping("/{projetoId}/matricularAluno/{alunoId}")
+    @ApiOperation(value = "Vincula um aluno a um projeto a partir do seu identificador")
+    public Aluno patchAlunoAndProfessor(@PathVariable("projetoId") Long projetoId, @PathVariable("alunoId") Long alunoId) {
+        Aluno aluno = alunoRepository.findById(alunoId).get();
+        Projeto projeto = projetoRepository.findById(projetoId).get();
+        aluno.setProjeto(projeto);
+        return alunoRepository.save(aluno);
+    }
 
 }
