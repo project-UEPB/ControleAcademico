@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -45,10 +46,19 @@ public class Professor {
     @Column(name = "formacao")
     private String formacao;
 
+    // @RestResource(path = "professorProjeto", rel="projeto")
     // @OneToOne
     // @JoinColumn(name = "projeto_id")
-    // // @RestResource(path = "professorProjeto", rel="projeto")
     // private Projeto projeto;
+
+    // @OneToOne(mappedBy = "professores")
+    // private Projeto projeto;
+    
+    @JsonManagedReference
+    @OneToOne(fetch = FetchType.LAZY,
+    cascade =  CascadeType.ALL,
+    mappedBy = "professor")
+    private Projeto projeto;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "professor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

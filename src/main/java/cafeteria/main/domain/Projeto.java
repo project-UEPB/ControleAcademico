@@ -1,5 +1,6 @@
 package cafeteria.main.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "projeto")
+@Table(name = "projetos")
 public class Projeto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,10 +26,19 @@ public class Projeto {
     @Column(name = "descricao")
     private String descricao;
 
-//    @JsonManagedReference
     // @JsonIgnore
     // @OneToOne(mappedBy = "projeto")
     // private Professor professor;
+    
+    // @OneToOne
+    // @JoinColumn(name = "professor_id")
+    // private Professor professor;
+    
+    // @JsonIgnore
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "projeto_id", nullable = true)
+    private Professor professor;
 
     // @JsonManagedReference
     // @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
@@ -39,5 +49,8 @@ public class Projeto {
     public Projeto(String name, String descricao) {
         this.name = name;
         this.descricao = descricao;
+    }
+
+    public void setAluno(Aluno aluno) {
     }
 }

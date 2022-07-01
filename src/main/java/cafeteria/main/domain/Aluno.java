@@ -56,7 +56,7 @@ public class Aluno {
     private Turma turma;
 
     // @JsonBackReference
-    @JsonIgnore
+    // @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
