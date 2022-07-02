@@ -51,7 +51,7 @@ public class AlunoController {
         }
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"*/*"})
     @ApiOperation(value = "Cria um novo aluno")
     public ResponseEntity<?> createAluno(@RequestBody AlunoDTO alunoDTO) {
         try {

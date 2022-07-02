@@ -42,7 +42,7 @@ public class TurmaController {
         return turmaRepository.findById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"*/*"})
     @ApiOperation(value = "Cria uma nova turma")
     public Turma createTurma(@RequestBody Turma turma) {
         return turmaRepository.save(turma);

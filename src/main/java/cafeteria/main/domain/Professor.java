@@ -36,7 +36,8 @@ public class Professor {
     private String formacao;
 
     @JsonBackReference
-    @OneToOne(mappedBy = "professor", fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
     @JsonManagedReference

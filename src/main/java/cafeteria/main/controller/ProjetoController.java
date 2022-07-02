@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Projeto")
+@RequestMapping("/projetos")
 @Api(value = "Projeto")
 public class ProjetoController {
 
@@ -40,7 +40,7 @@ public class ProjetoController {
         return projetoRepository.findById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = {"*/*"})
     @ApiOperation(value = "Cria um novo projeto")
     public Projeto createProjeto(@RequestBody Projeto projeto) {
         return projetoRepository.save(projeto);
