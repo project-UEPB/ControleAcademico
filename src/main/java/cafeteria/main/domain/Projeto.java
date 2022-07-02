@@ -26,18 +26,9 @@ public class Projeto {
     @Column(name = "descricao")
     private String descricao;
 
-    // @JsonIgnore
-    // @OneToOne(mappedBy = "projeto")
-    // private Professor professor;
-    
-    // @OneToOne
-    // @JoinColumn(name = "professor_id")
-    // private Professor professor;
-    
-    // @JsonIgnore
-    @JsonBackReference
+    // @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "projeto_id", nullable = true)
+    @JoinColumn(name = "professor_id", nullable = true)
     private Professor professor;
 
     // @JsonManagedReference

@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Proxy;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,6 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "professores")
+@Proxy(lazy = false)
 public class Professor {
     
     @Id
@@ -54,7 +57,8 @@ public class Professor {
     // @OneToOne(mappedBy = "professores")
     // private Projeto projeto;
     
-    @JsonManagedReference
+    // @JsonManagedReference
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,
     cascade =  CascadeType.ALL,
     mappedBy = "professor")
