@@ -43,23 +43,15 @@ public class AlunoController {
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Busca um aluno pelo seu id")
-    public ResponseEntity<?> getAlunoById(@PathVariable Long id) {
-        try {
-            return new ResponseEntity<>(alunoMapper.convertToAlunoDTO(alunoService.findById(id)), HttpStatus.OK);
-        } catch (NotFoundException e) {
-            return ResponseEntity.badRequest().body(new GenericResponseErrorDTO(e.getMessage()));
-        }
+    public ResponseEntity<?> getAlunoById(@PathVariable Long id) throws NotFoundException {
+        return new ResponseEntity<>(alunoMapper.convertToAlunoDTO(alunoService.findById(id)), HttpStatus.OK);
     }
 
     @PostMapping
     @ApiOperation(value = "Cria um novo aluno")
-    public ResponseEntity<?> createAluno(@RequestBody AlunoDTO alunoDTO) {
-        try {
-            Aluno aluno = alunoMapper.convertFromAlunoDTO(alunoDTO);
-            return new ResponseEntity<>(alunoService.createAluno(aluno), HttpStatus.CREATED);
-        } catch (ExistingAlunoSameMatriculaException e) {
-            return ResponseEntity.badRequest().body(new GenericResponseErrorDTO(e.getMessage()));
-        }
+    public ResponseEntity<?> createAluno(@RequestBody AlunoDTO alunoDTO) throws ExistingAlunoSameMatriculaException {
+        Aluno aluno = alunoMapper.convertFromAlunoDTO(alunoDTO);
+        return new ResponseEntity<>(alunoService.createAluno(aluno), HttpStatus.CREATED);
     }
 
     @PatchMapping
