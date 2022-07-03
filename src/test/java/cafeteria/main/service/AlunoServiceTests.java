@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Nested;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class UsuarioServiceTests {
+class AlunoServiceTests {
 
     private static final long VALID_ALUNO_ID = 1;
     private static final long INVALID_ALUNO_ID = 10;
