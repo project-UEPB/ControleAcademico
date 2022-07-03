@@ -63,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
             // Qualquer usuário pode fazer GET nos projetos
-            .antMatchers(HttpMethod.GET, "/projetos/**").hasAnyAuthority("user", "admin")
-            .antMatchers(AUTH_ADMIN).hasAuthority("admin")
+            // .antMatchers(HttpMethod.GET, "/projetos/**").hasAnyAuthority("user", "admin")
+            // .antMatchers(AUTH_ADMIN).hasAuthority("admin")
             .antMatchers(AUTH_WHITELIST).permitAll()
             .anyRequest().authenticated()
             .and().addFilter(new AuthenticationFilter(authenticationManager()))
