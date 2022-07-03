@@ -61,9 +61,9 @@ public class Aluno {
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
-//    public Aluno(String name, String matricula, String email) {
-//        this.name = name;
-//        this.matricula = matricula;
-//        this.email = email;
-//    }
+   public Aluno(String name, String matricula, String email) {
+       this.name = name;
+       this.matricula = matricula;
+       this.email = email;
+   }
 }

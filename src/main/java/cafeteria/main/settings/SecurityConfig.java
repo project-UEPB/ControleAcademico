@@ -29,15 +29,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthenticationProvider authenticationProvider;
 
     private static final String[] AUTH_WHITELIST = {
-        "/v2/api-docs",
-        "/signup",
-        "/actuator/health",
+        "/v2/api-docs/**",
+        "/signup/**",
+        "/actuator/health/**",
         "/login/**",
         "/h2-console/**",
-        "/swagger-resources",
         "/swagger-resources/**",
-        "/configuration/ui",
-        "/configuration/security",
+        "/swagger-resources/**",
+        "/configuration/ui/**",
+        "/configuration/security/**",
         "/swagger-ui.html/**",
         "/webjars/**",
         // Qualquer usuário pode se cadastrar
@@ -63,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
             // Qualquer usuário pode fazer GET nos projetos
-            // .antMatchers(HttpMethod.GET, "/projetos/**").hasAnyAuthority("user", "admin")
-            // .antMatchers(AUTH_ADMIN).hasAuthority("admin")
+            .antMatchers(HttpMethod.GET, "/projetos/**").hasAnyAuthority("user", "admin")
+            .antMatchers(AUTH_ADMIN).hasAuthority("admin")
             .antMatchers(AUTH_WHITELIST).permitAll()
             .anyRequest().authenticated()
             .and().addFilter(new AuthenticationFilter(authenticationManager()))
