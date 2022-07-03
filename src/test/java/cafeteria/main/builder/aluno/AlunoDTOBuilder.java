@@ -27,9 +27,3 @@ public class AlunoDTOBuilder {
         return new AlunoDTO(name, matricula, email, turma, CRA);
     }
 }
-
-//     private String name;
-//     private String matricula;
-//     private String email;
-//     private Turma turma;
-//     private double CRA;

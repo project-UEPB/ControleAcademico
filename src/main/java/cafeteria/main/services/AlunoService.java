@@ -49,6 +49,10 @@ public class AlunoService {
     public Aluno findById(Long id) throws AlunoNotFoundException {
         return alunoRepository.findById(id).orElseThrow(() -> new AlunoNotFoundException("Não existe um aluno com esse identificador!"));
     }
+    
+    public Aluno findByName(String name) throws AlunoNotFoundException {
+        return alunoRepository.findByName(name).orElseThrow(() -> new AlunoNotFoundException("Não existe um aluno com esse nome!"));
+    }
 
     public void deleteAluno(Long id) {
         Aluno alunoToDelete = alunoRepository.findById(id).get();
