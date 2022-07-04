@@ -29,7 +29,7 @@ public class AlunoBuilder {
     @Builder.Default
     private Projeto projeto = new Projeto();
     
-    public Aluno toAluno() {
-        return new Aluno(id, name, matricula, email, CRA, turma, projeto);
-    }
+//    public Aluno toAluno() {
+//        return new Aluno(id, name, matricula, email, CRA, turma, projeto);
+//    }
 }

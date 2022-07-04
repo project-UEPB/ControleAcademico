@@ -3,6 +3,7 @@ package cafeteria.main.controller;
 import cafeteria.main.domain.Aluno;
 import cafeteria.main.domain.Professor;
 import cafeteria.main.domain.Projeto;
+import cafeteria.main.enums.AlunoNivel;
 import cafeteria.main.repository.AlunoRepository;
 import cafeteria.main.repository.ProfessorRepository;
 import cafeteria.main.repository.ProjetoRepository;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/projetos")
 @Api(value = "Projeto")
-public class ProjetoController {
+public class  ProjetoController {
 
     @Autowired
     private ProjetoRepository projetoRepository;
@@ -77,5 +78,16 @@ public class ProjetoController {
         aluno.setProjeto(projeto);
         return alunoRepository.save(aluno);
     }
+
+    @PatchMapping("{projetoId}/matricularAluno/{alunoId}/{papelAluno}")
+    @ApiOperation(value = "Atribui um papel do projeto ao aluno")
+    public Aluno atribuirPapelAoAluno(@PathVariable("projetoId") Long projetoId, @PathVariable("alunoId") Long alunoId, @PathVariable("papelAluno") String papelAluno) {
+        Aluno aluno = alunoRepository.findById(alunoId).get();
+        Projeto projeto = projetoRepository.findById(projetoId).get();
+
+        AlunoNivel alunoNivel = AlunoNivel.valueOf(papelAluno);
+        aluno.setAlunoNivel(alunoNivel);
+        return alunoRepository.save(aluno);
+    }   //desenvolver lógica
 
 }

@@ -23,7 +23,7 @@ public class AlunoDTOBuilder {
     @Builder.Default
     private Double CRA = 10.0;
     
-    public AlunoDTO toAlunoDTO() {
-        return new AlunoDTO(name, matricula, email, turma, CRA);
-    }
+//    public AlunoDTO toAlunoDTO() {
+//        return new AlunoDTO(name, matricula, email, turma, CRA);
+//    }
 }
