@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import cafeteria.main.domain.Aluno;
 import cafeteria.main.dto.AlunoDTO;
 import cafeteria.main.dto.AlunoWithPIBICDTO;
+import cafeteria.main.dto.AlunoWithProjetoDTO;
 import cafeteria.main.dto.GenericResponseErrorDTO;
 import cafeteria.main.exceptions.ExistingAlunoSameMatriculaException;
 import cafeteria.main.mapper.AlunoMapper;
@@ -37,8 +38,8 @@ public class AlunoController {
     public List<AlunoDTO> getAlunos() {
         List<Aluno> alunos = alunoService.listAllAlunos();
         return alunos.stream()
-            .map(alunoMapper::convertToAlunoDTO)
-            .collect(Collectors.toList());
+                .map(alunoMapper::convertToAlunoDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -51,7 +52,7 @@ public class AlunoController {
         }
     }
 
-    @PostMapping(consumes = {"*/*"})
+    @PostMapping
     @ApiOperation(value = "Cria um novo aluno")
     public ResponseEntity<?> createAluno(@RequestBody AlunoDTO alunoDTO) {
         try {
@@ -73,6 +74,18 @@ public class AlunoController {
             return ResponseEntity.badRequest().body(new GenericResponseErrorDTO(e.getMessage()));
         }
     }
+
+//    @PatchMapping("{alunoId}/updateLevel/{projetoId}")
+//    @ApiOperation(value = "Atribui um nivel no projeto ao aluno")
+//    public ResponseEntity<?> updateLevelAluno(@RequestBody AlunoWithProjetoDTO alunoDTO) {
+//        try {
+//            Aluno aluno = alunoMapper.convertFromAlunoWithProjetoDTO(alunoDTO);
+//            Aluno alunoUpdated = alunoService.assignStudentLevel(aluno, alunoDTO.getAlunoNivel());
+//            return new ResponseEntity<>(alunoMapper.convertToAlunoDTO(alunoUpdated), HttpStatus.NO_CONTENT);
+//        } catch (NotFoundException e) {
+//            return ResponseEntity.badRequest().body(new GenericResponseErrorDTO(e.getMessage()));
+//        }
+//    }
 
     @PutMapping("/{id}")
     @ApiOperation(value = "Atualiza um aluno a partir do seu id")

@@ -59,13 +59,14 @@ public class ProjetoController {
         projetoRepository.delete(projetoRepository.findById(id).get());
     }
 
-    @PatchMapping("/{projetoId}/vincularProfessor/{professorId")
+    @PatchMapping("/{projetoId}/vincularProfessor/{professorId}")
     @ApiOperation(value = "Vincula um professor a um projeto a partir do seu id")
     public Projeto vincularProjeto(@PathVariable("projetoId") Long projetoId, @PathVariable("professorId") Long professorId){
         Professor professor = professorRepository.findById(professorId).get();
-        Projeto projeto = projetoRepository.findById(professorId).get();
+        Projeto projeto = projetoRepository.findById(projetoId).get();
         projeto.setProfessor(professor);
-        return projetoRepository.save(projeto);
+        Projeto saved = projetoRepository.save(projeto);
+        return saved;
     }
 
     @PatchMapping("/{projetoId}/matricularAluno/{alunoId}")

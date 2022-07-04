@@ -1,6 +1,8 @@
 package cafeteria.main.services;
 
 import java.util.List;
+
+import cafeteria.main.enums.AlunoNivel;
 import javassist.NotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +20,26 @@ public class AlunoService {
 
     public Aluno updateBonusAluno(Aluno aluno, double bonus) throws NotFoundException {
         if (!alunoRepository.findByName(aluno.getMatricula()).isPresent())
-            throw new NotFoundException("Não existe um Aluno com essa Matricula!");
+            throw new NotFoundException("Não existe Aluno com essa Matricula!");
 
         Aluno alunoEntity = alunoRepository.findByName(aluno.getMatricula()).get();
 
         double discountFinal = alunoEntity.getCRA() + bonus;
-        alunoEntity.setCRA(alunoEntity.getCRA() - discountFinal);
+        alunoEntity.setCRA(discountFinal);
 
         return alunoRepository.save(alunoEntity);
+    }
+
+    public Aluno assignStudentLevel(Aluno aluno, AlunoNivel nivel) throws  NotFoundException {
+        if(!alunoRepository.findByName(aluno.getMatricula()).isPresent())
+            throw new NotFoundException("Não existe Aluno com essa Matricula!");
+
+        Aluno alunoEntity = alunoRepository.findByName(aluno.getMatricula()).get();
+
+        alunoEntity.setAlunoNivel(nivel);
+
+        return alunoRepository.save(alunoEntity);
+
     }
 
     public Aluno createAluno(Aluno aluno) throws ExistingAlunoSameMatriculaException {

@@ -36,14 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/configuration/ui",
         "/configuration/security",
         "/swagger-ui.html/**",
-        "/webjars/**"
+        "/webjars/**",
+        // Qualquer usuário pode se cadastrar
+        "/professores/**",
+        "/alunos/**",
     };
     
     private static final String[] AUTH_ADMIN = {
             "/turmas/**",
-            "/professores/**",
-            "/alunos/**",
-            "/projeto/**"
+            "/projetos/**"
     };
 
     @Override
@@ -58,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
 
         http.authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/alunos/**").hasAnyAuthority("user", "admin")
+            // Qualquer usuário pode fazer GET nos projetos
+            .antMatchers(HttpMethod.GET, "/projetos/**").hasAnyAuthority("user", "admin")
             .antMatchers(AUTH_ADMIN).hasAuthority("admin")
             .antMatchers(AUTH_WHITELIST).permitAll()
             .anyRequest().authenticated()

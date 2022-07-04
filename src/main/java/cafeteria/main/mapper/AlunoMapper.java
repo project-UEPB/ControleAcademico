@@ -1,6 +1,7 @@
 package cafeteria.main.mapper;
 
 import cafeteria.main.dto.AlunoWithPIBICDTO;
+import cafeteria.main.dto.AlunoWithProjetoDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,8 +13,18 @@ public class AlunoMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    // conversion methods between Coffee and CoffeeDTO ...
-    
+    public AlunoDTO convertToAlunoWithProjetoDTO(Aluno aluno) {
+        AlunoDTO alunoDTO = modelMapper.map(aluno, AlunoDTO.class);
+
+        return alunoDTO;
+    }
+
+    public Aluno convertFromAlunoWithProjetoDTO(AlunoWithProjetoDTO alunoWithProjetoDTO) {
+        Aluno aluno = modelMapper.map(alunoWithProjetoDTO, Aluno.class);
+
+        return aluno;
+    }
+
     public AlunoDTO convertToAlunoWithPIBICDTO(Aluno aluno) {
         AlunoDTO alunoDTO = modelMapper.map(aluno, AlunoDTO.class);
 

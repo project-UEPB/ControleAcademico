@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import cafeteria.main.enums.AlunoNivel;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -48,16 +49,26 @@ public class Aluno {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "CRA")
     private double CRA;
+
+    @Column(name = "alunoNivel")
+    private AlunoNivel alunoNivel;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
-    @JsonBackReference
+    // @JsonBackReference
+    // @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "projeto_id")
     private Projeto projeto;
 
+//    public Aluno(String name, String matricula, String email) {
+//        this.name = name;
+//        this.matricula = matricula;
+//        this.email = email;
+//    }
 }
