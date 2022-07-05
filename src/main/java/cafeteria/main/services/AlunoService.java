@@ -8,6 +8,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cafeteria.main.exceptions.AlunoNotFoundException;
 import cafeteria.main.exceptions.ExistingAlunoSameMatriculaException;
 import cafeteria.main.domain.Aluno;
 import cafeteria.main.repository.AlunoRepository;
@@ -49,6 +50,7 @@ public class AlunoService {
     }
 
     public Aluno updateAluno(Long id, Aluno aluno) {
+        alunoRepository.findById(aluno.getId()).orElseThrow(() -> new AlunoNotFoundException("Não existe um aluno com esse identificador!"));
         aluno.setId(id);
         return alunoRepository.save(aluno);
     }
@@ -57,8 +59,8 @@ public class AlunoService {
         return alunoRepository.findAll();
     }
 
-    public Aluno findById(Long id) throws NotFoundException {
-        return alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Não existe um café com esse identificador!"));
+    public Aluno findById(Long id) throws AlunoNotFoundException {
+        return alunoRepository.findById(id).orElseThrow(() -> new AlunoNotFoundException("Não existe um café com esse identificador!"));
     }
 
     public void deleteAluno(Long id) {

@@ -2,7 +2,7 @@ package cafeteria.main.builder.aluno;
 
 import cafeteria.main.domain.Turma;
 import cafeteria.main.dto.AlunoDTO;
-
+import cafeteria.main.enums.AlunoNivel;
 import lombok.Builder;
 
 @Builder
@@ -16,6 +16,9 @@ public class AlunoDTOBuilder {
 
     @Builder.Default
     private String email = "john@mail.com";
+    
+    @Builder.Default
+    private AlunoNivel alunoNivel = AlunoNivel.JUNIOR;
 
     @Builder.Default
     private Turma turma = new Turma();
@@ -23,7 +26,7 @@ public class AlunoDTOBuilder {
     @Builder.Default
     private Double CRA = 10.0;
     
-//    public AlunoDTO toAlunoDTO() {
-//        return new AlunoDTO(name, matricula, email, turma, CRA);
-//    }
+   public AlunoDTO toAlunoDTO() {
+       return new AlunoDTO(name, matricula, email, turma, alunoNivel, CRA);
+   }
 }
